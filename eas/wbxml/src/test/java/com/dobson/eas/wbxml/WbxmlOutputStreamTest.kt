@@ -17,7 +17,7 @@ internal class WbxmlOutputStreamTest {
     lateinit var mockOutputStream: OutputStream
 
     @MockK(relaxed = true)
-    lateinit var mockBlock: WbxmlOutputStream.() -> Unit
+    lateinit var mockBlock: IWbxmlOutputStream.() -> Unit
 
     @InjectMockKs
     lateinit var wbxmlOutputStream: WbxmlOutputStream

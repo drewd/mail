@@ -3,11 +3,23 @@ package com.dobson.eas.wbxml
 import java.io.IOException
 import java.io.OutputStream
 
-internal class WbxmlOutputStream(private val out: OutputStream) : OutputStream() {
+interface IWbxmlOutputStream {
+    @Throws(IOException::class)
+    fun open(namespace: Namespace, token: Int, block: (IWbxmlOutputStream.() -> Unit)? = null)
+
+    @Throws(IOException::class)
+    fun write(b: Int)
+
+    @Throws(IOException::class)
+    fun write(value: ByteArray)
+}
+
+internal class WbxmlOutputStream(private val out: OutputStream) : OutputStream(),
+    IWbxmlOutputStream {
     private var currentNamespace: Namespace = Namespace.AirSync
 
     @Throws(IOException::class)
-    fun open(namespace: Namespace, token: Int, block: (WbxmlOutputStream.() -> Unit)? = null) {
+    override fun open(namespace: Namespace, token: Int, block: (IWbxmlOutputStream.() -> Unit)?) {
         if (currentNamespace != namespace) {
             write(SWITCH_PAGE)
             write(namespace.page)
