@@ -34,5 +34,6 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
+    implementation(libs.mockk.android)
     testImplementation(libs.junit)
 }
