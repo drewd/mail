@@ -1,22 +1,12 @@
 package com.dobson.eas.wbxml
 
+import com.dobson.eas.wbxml.annotation.Namespace
 import java.io.IOException
 import java.io.OutputStream
 
-interface IWbxmlOutputStream {
-    @Throws(IOException::class)
-    fun open(namespace: Namespace, token: Int, block: (IWbxmlOutputStream.() -> Unit)? = null)
-
-    @Throws(IOException::class)
-    fun write(b: Int)
-
-    @Throws(IOException::class)
-    fun write(value: ByteArray)
-}
-
 internal class WbxmlOutputStream(private val out: OutputStream) : OutputStream(),
     IWbxmlOutputStream {
-    private var currentNamespace: Namespace = Namespace.AirSync
+    private var currentNamespace = Namespace.AirSync
 
     @Throws(IOException::class)
     override fun open(namespace: Namespace, token: Int, block: (IWbxmlOutputStream.() -> Unit)?) {

@@ -30,10 +30,18 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/LICENSE.md"
+            excludes += "META-INF/LICENSE-notice.md"
+        }
+    }
 }
 
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.mockk.android)
+    implementation(project(":eas:wbxml-annotation"))
     testImplementation(libs.junit)
 }

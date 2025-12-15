@@ -1,4 +1,4 @@
-package com.dobson.eas.wbxml
+package com.dobson.eas.wbxml.annotation
 
 enum class Namespace(val page: Int) {
     AirSync(0),

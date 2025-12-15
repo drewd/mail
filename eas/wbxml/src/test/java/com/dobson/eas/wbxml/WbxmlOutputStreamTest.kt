@@ -17,14 +17,14 @@ internal class WbxmlOutputStreamTest {
     lateinit var mockOutputStream: OutputStream
 
     @MockK(relaxed = true)
-    lateinit var mockBlock: IWbxmlOutputStream.() -> Unit
+    lateinit var mockBlock: com.dobson.eas.wbxml.IWbxmlOutputStream.() -> Unit
 
     @InjectMockKs
     lateinit var wbxmlOutputStream: WbxmlOutputStream
 
     @Test
     fun `open writes token then block then closes`() {
-        wbxmlOutputStream.open(Namespace.AirSync, 5555, mockBlock)
+        wbxmlOutputStream.open(com.dobson.eas.wbxml.annotation.Namespace.AirSync, 5555, mockBlock)
         verify(ordering = Ordering.SEQUENCE) {
             mockOutputStream.write(5555 or WITH_CONTENT)
             mockBlock(wbxmlOutputStream)
@@ -34,7 +34,7 @@ internal class WbxmlOutputStreamTest {
 
     @Test
     fun `open writes token then closes`() {
-        wbxmlOutputStream.open(Namespace.AirSync, 5555)
+        wbxmlOutputStream.open(com.dobson.eas.wbxml.annotation.Namespace.AirSync, 5555)
         verify(ordering = Ordering.SEQUENCE) {
             mockOutputStream.write(5555)
             mockOutputStream.write(END)
@@ -43,10 +43,10 @@ internal class WbxmlOutputStreamTest {
 
     @Test
     fun `open switch page`() {
-        wbxmlOutputStream.open(Namespace.Contacts, 5555, mockBlock)
+        wbxmlOutputStream.open(com.dobson.eas.wbxml.annotation.Namespace.Contacts, 5555, mockBlock)
         verify(ordering = Ordering.SEQUENCE) {
             mockOutputStream.write(SWITCH_PAGE)
-            mockOutputStream.write(Namespace.Contacts.page)
+            mockOutputStream.write(com.dobson.eas.wbxml.annotation.Namespace.Contacts.page)
             mockOutputStream.write(5555 or WITH_CONTENT)
             mockOutputStream.write(END)
         }

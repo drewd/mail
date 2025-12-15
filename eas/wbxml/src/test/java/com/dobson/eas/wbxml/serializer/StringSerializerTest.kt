@@ -16,7 +16,7 @@ internal class StringSerializerTest {
     val mockkRule = MockKRule(this)
 
     @RelaxedMockK
-    lateinit var mockIWbxmlOutputStream: IWbxmlOutputStream
+    lateinit var mockIWbxmlOutputStream: com.dobson.eas.wbxml.IWbxmlOutputStream
 
     @InjectMockKs
     lateinit var serializer: StringSerializer

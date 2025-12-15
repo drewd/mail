@@ -22,3 +22,5 @@ dependencyResolutionManagement {
 rootProject.name = "mail"
 include(":app")
 include(":eas:wbxml")
+include(":eas:wbxml-compiler")
+include(":eas:wbxml-annotation")
